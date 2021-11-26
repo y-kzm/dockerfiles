@@ -8,7 +8,7 @@ $ docker container [副コマンド] [オプション]
 > "container"部は省略可．
 
 | 副コマンド | 内容 | 
-|:---|:--- |:--- |
+| --- | --- |
 | start | コンテナ開始． | 
 | stop | コンテナ停止． |  
 | create | イメージからコンテナを作成． |  
@@ -19,5 +19,5 @@ $ docker container [副コマンド] [オプション]
 | cp | コンテナ-ホスト間でファイルコピー． |  
 | commit | コンテナをイメージに変換． |  
 
-[Option]: https://qiita.com/TaaaZyyy/items/4ecf21f23e6730faf696 
-> 主なオプション[Option]．
+[オプション]: https://qiita.com/TaaaZyyy/items/4ecf21f23e6730faf696 
+> 主な[オプション]．

@@ -78,7 +78,7 @@ $ docker network [副コマンド] [オプション]
 
 ### etc.
 - その他のコマンド．
-    - <'none'> TAG の削除．
+    - ***<none>*** TAG の削除．
     ~~~
     $ docker rmi $(docker images -f "dangling=true" -q)
     ~~~

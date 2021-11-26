@@ -41,6 +41,8 @@ $ docker image [副コマンド] [オプション]
 
 [Docker Hub]: https://hub.docker.com 
 > [Docker Hub].
+> docker image ls -> docker images
+> docker image rm -> docker rmi
 
 ---
 ### Volume.
@@ -73,4 +75,11 @@ $ docker network [副コマンド] [オプション]
 | ls  | ネットワーク一覧を表示． | 
 | prune  | 現在コンテナが接続されていないネットワークを削除． | 
 | rm  | ネットワークの削除． | 
+
+### etc.
+- その他のコマンド．
+    - <none> TAG の削除．
+    ~~~
+    $ docker rmi $(docker images -f "dangling=true" -q)
+    ~~~
 

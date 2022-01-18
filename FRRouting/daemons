@@ -1,0 +1,17 @@
+ospfd=yes
+ospf6d=yes
+ripd=no
+ripngd=no
+isisd=no
+pimd=no
+ldpd=no
+nhrpd=no
+eigrpd=no
+babeld=no
+sharpd=yes
+pbrd=no
+bfdd=no
+fabricd=no
+vrrpd=yes
+bgpd=yes
+

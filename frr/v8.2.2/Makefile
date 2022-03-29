@@ -1,4 +1,4 @@
-IMG=yykzm/frr:dev
+IMG=yykzm/frr:v8.2.2
 build:
 	docker build -t $(IMG) .
 push:

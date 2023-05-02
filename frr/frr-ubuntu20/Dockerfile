@@ -90,4 +90,5 @@ RUN cd ~/frr && \
 RUN cd ~/frr && make check || true
 
 COPY ./docker-start /usr/sbin/docker-start
+RUN sudo chmod +x /usr/sbin/docker-start
 CMD ["/usr/sbin/docker-start"]

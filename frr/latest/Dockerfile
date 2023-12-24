@@ -88,6 +88,7 @@ RUN cd ~/frr && \
     sudo make install
 
 RUN cd ~/frr && make check || true
+COPY daemons /etc/frr/daemons
 
 COPY ./docker-start /usr/sbin/docker-start
 RUN sudo chmod +x /usr/sbin/docker-start

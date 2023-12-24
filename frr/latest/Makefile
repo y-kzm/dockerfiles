@@ -1,4 +1,4 @@
-IMG = yykzm/frr-ubuntu20:latest
+IMG = yykzm/frr:latest
 build:
 	docker build -t $(IMG) .
 rmi:

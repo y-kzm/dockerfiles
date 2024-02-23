@@ -1,3 +1,4 @@
+vtysh_enable=yes
 ospfd=yes
 ospf6d=yes
 ripd=yes

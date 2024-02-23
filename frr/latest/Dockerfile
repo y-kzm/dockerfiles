@@ -1,4 +1,4 @@
-# Ref: https://github.com/FRRouting/frr/blob/master/docker/ubuntu20-ci/Dockerfile
+# Reference: https://github.com/FRRouting/frr/blob/master/docker/ubuntu20-ci/Dockerfile
 FROM ubuntu:20.04
 
 ARG DEBIAN_FRONTEND=noninteractive
@@ -44,7 +44,8 @@ RUN wget https://dl.google.com/go/go1.19.3.linux-amd64.tar.gz \
  && tar -C /usr/local -xzf go1.19.3.linux-amd64.tar.gz \
  && echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc
 
-# Ref: https://github.com/slankdev/Dockerfiles/tree/master/ubuntu/18.04
+# Reference: https://github.com/slankdev/Dockerfiles/tree/master/ubuntu/18.04
+# Scripts to enable/disable seg6 router
 ADD ./enable_seg6_router.py /usr/bin/enable_seg6_router.py
 ADD ./disable_seg6_router.py /usr/bin/disable_seg6_router.py
 RUN chmod +x /usr/bin/enable_seg6_router.py
@@ -52,11 +53,12 @@ RUN chmod +x /usr/bin/disable_seg6_router.py
 
 USER frr:frr
 
-# build and install libyang2
+# Build and install libyang2
+# libyang2 >= 2.1.128
 RUN cd && pwd && ls -al && \
     git clone https://github.com/CESNET/libyang.git && \
     cd libyang && \
-    git checkout v2.0.0 && \
+    git checkout v2.1.128 && \
     mkdir build; cd build && \
     cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr \
           -DCMAKE_BUILD_TYPE:String="Release" .. && \
@@ -87,11 +89,17 @@ RUN cd ~/frr && \
     make -j $(nproc) && \
     sudo make install
 
+RUN cd ~/frr && \
+    sudo install -m 775 -o frr -g frr -d /var/log/frr && \
+    sudo install -m 775 -o frr -g frrvty -d /etc/frr && \
+    sudo install -m 640 -o frr -g frrvty tools/etc/frr/vtysh.conf /etc/frr/vtysh.conf && \
+    sudo install -m 640 -o frr -g frr tools/etc/frr/frr.conf /etc/frr/frr.conf && \
+    sudo install -m 640 -o frr -g frr tools/etc/frr/daemons.conf /etc/frr/daemons.conf && \
+    sudo install -m 640 -o frr -g frr tools/etc/frr/daemons /etc/frr/daemons 
+
 RUN cd ~/frr && make check || true
-COPY daemons /etc/frr/daemons
 
 COPY ./docker-start /usr/sbin/docker-start
-RUN sudo chmod +x /usr/sbin/docker-start
 
 USER root
 WORKDIR /root
